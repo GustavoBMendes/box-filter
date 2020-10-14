@@ -6,7 +6,7 @@ def media(ponto):
 	return ponto
 
 imagem = cv2.imread('teste.png', 0)
-cv2.imshow('Teste', imagem)
+cv2.imshow('Imagem original', imagem)
 
 proporcao = 2
 
@@ -40,5 +40,17 @@ print("Altura: %d pixels" % (reduzida.shape[0]))
 print("Largura: %d pixels" % (reduzida.shape[1]))
 
 cv2.imshow("Imagem reduzida", reduzida)
+upBF = np.repeat(reduzida, proporcao, axis=1)
+upBF = np.repeat(upBF, proporcao, axis=0)
+cv2.imshow('Box filter no tamanho original', upBF)
+
+#redução por downsampling
+downsampling = imagem[::proporcao, ::proporcao]
+cv2.imshow('Reduzida por downsampling', downsampling)
+
+#retorno ao tamanho original através de upsampling
+upsampling = np.repeat(downsampling, proporcao, axis=1)
+upsampling = np.repeat(upsampling, proporcao, axis=0)
+cv2.imshow('Upsampling', upsampling)
 
 cv2.waitKey(0)
