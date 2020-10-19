@@ -1,14 +1,21 @@
 import cv2
 import numpy as np
+from argparse import ArgumentParser
 
-def media(ponto):
-	print(ponto)
-	return ponto
+parser = ArgumentParser()
+parser.add_argument('-a', 
+	'--arquivos', 
+	type=str, 
+	nargs='+', 
+	help='Imagem a ser lida, informe o nome completo do arquivo, em seguida a proporção em que a imagem será reduzida, exemplo: python boxfilter.py -a teste.png 2')
+args = parser.parse_args()
+arquivos = args.arquivos
+print(arquivos)
 
-imagem = cv2.imread('teste.png', 0)
+imagem = cv2.imread(arquivos[0], 0)
 cv2.imshow('Imagem original', imagem)
 
-proporcao = 2
+proporcao = int(arquivos[1])
 
 print("Altura: %d pixels" % (imagem.shape[0]))
 print("Largura: %d pixels" % (imagem.shape[1]))
@@ -39,18 +46,18 @@ print(reduzida)
 print("Altura: %d pixels" % (reduzida.shape[0]))
 print("Largura: %d pixels" % (reduzida.shape[1]))
 
-cv2.imshow("Imagem reduzida", reduzida)
+cv2.imshow("Imagem reduzida com box filter", reduzida)
 upBF = np.repeat(reduzida, proporcao, axis=1)
 upBF = np.repeat(upBF, proporcao, axis=0)
 cv2.imshow('Box filter no tamanho original', upBF)
 
 #redução por downsampling
 downsampling = imagem[::proporcao, ::proporcao]
-cv2.imshow('Reduzida por downsampling', downsampling)
+cv2.imshow('Reduzida por vizinho mais proximo', downsampling)
 
 #retorno ao tamanho original através de upsampling
 upsampling = np.repeat(downsampling, proporcao, axis=1)
 upsampling = np.repeat(upsampling, proporcao, axis=0)
-cv2.imshow('Upsampling', upsampling)
+cv2.imshow('Upsampling vizinho mais proximo', upsampling)
 
 cv2.waitKey(0)

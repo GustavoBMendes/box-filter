@@ -1,0 +1,7 @@
+https://sites.google.com/site/luisfilipeap/tutorial-opencv-python/02
+
+http://www.galirows.com.br/meublog/opencv-python/opencv2-python27/capitulo1-basico/mostrar-imagem-opencv-python/
+
+https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/
+
+https://www.pythoninformer.com/python-libraries/numpy/creating-arrays-from-data/
